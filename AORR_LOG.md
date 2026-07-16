@@ -1,5 +1,15 @@
 # AORR Log
 
+## 2026-07-16 Step 9 Change Request Re-loop
+
+- Mode: `CODEX_FALLBACK`; Claude verifier tool was unavailable in this session, so Codex handled the validation path directly after updating the run record.
+- Pre-check: `MEMORY.md` recorded the loop snapshot, current commit `8c357f2`, last normal deploy `2698d7f`, Git status, and rollback criteria before any code edits.
+- Act: added the Step 9 execution order note to `AORR.md`, then removed every public `[사람 확인 필요]` string from `index.html` and replaced it with neutral approved placeholders such as `공개 전` and `승인 전`.
+- Act: strengthened the shared surface styling in `styles.css` with heavier blur, translucency, glow, and layered glass treatment across panels, cards, tabs, controls, and choice overlays.
+- Verify: local HTTP smoke at `375px`, `768px`, and `1440px` showed `scrollWidth === clientWidth`, no `[사람 확인 필요]` in rendered text, `공개 전` present, and no console errors or page errors.
+- Verify: browser interaction smoke confirmed `window.__loopEngineer` existed, `survivor.start()` entered `running` state, and `snake.start()` entered `running` state with keyboard input accepted.
+- Result scope: public content cleanup and liquid-glass visual refresh completed; approval gate remains `DEPLOY_APPROVAL_REQUIRED`, with no commit, push, or redeploy yet.
+
 ## 2026-07-16 Survivor Mode Interaction Fix
 
 - Mode: `CODEX_FALLBACK`; `claude-sonnet-5` verifier returned no report in two non-interactive attempts, so Codex ran the unchanged pre/post checks.
