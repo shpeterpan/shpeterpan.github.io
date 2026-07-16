@@ -10,6 +10,11 @@
 - Verify: `node --check script.js`, `node --check game-core.js`, `node tests/regression.mjs`, and `git diff --check` passed.
 - Verify: browser checks at 375x812, 768x1024, and 1440x900 showed no horizontal overflow, no console warnings/errors, normal Survivor start, page scrolling outside Games, game input inside Games, and no oversized-card content skip.
 - Gate: local verification `PASS`; state moved to `DEPLOY_APPROVAL_REQUIRED`, and the user's current request explicitly approves commit, push, and deployment.
+- Security: tracked-path and staged-content secret scans passed; unrelated untracked files were excluded from the commit.
+- Deploy: committed implementation as `ec1b5fe` and pushed `main` to `https://github.com/shpeterpan/shpeterpan.github.io.git`.
+- Deploy verify: GitHub Pages served the new `script.js`, and `https://shpeterpan.github.io/` returned HTTP 200.
+- Public regression: desktop input isolation, oversized-card internal scrolling, Games keyboard control, 375px mobile overflow, Survivor start, and browser console checks all passed with zero warnings/errors.
+- Result: `DEPLOYED`; Claude returned no verifier report, so the deployment regression is recorded as `CODEX_FALLBACK`.
 
 ## 2026-07-16 Bottom Spacing Correction
 
