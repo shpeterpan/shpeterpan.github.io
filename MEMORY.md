@@ -22,17 +22,17 @@
 - Last test: 배포본 HTTP 200, 뱀서 선택 클릭·재개·콘솔 `PASS`
 
 ## Current State
-- 상태: `ACTING`
+- 상태: `DEPLOY_APPROVAL_REQUIRED` (현재 사용자 메시지에서 배포 승인 완료)
 - 실행 모드: `CODEX_FALLBACK`
-- Claude 모델: `claude-sonnet-5`(문서상 검증 대상, 이 세션에서는 직접 호출 불가)
-- 현재 commit: `b179345`
-- 마지막 정상 commit·URL: `b179345`, `https://shpeterpan.github.io/`
-- Git 상태: `main`, modified `AORR_LOG.md`, `MEMORY.md`, `index.html`, `script.js`, `styles.css`; untracked `.DS_Store`, `AUTOMATION_READINESS.md`, `CHANGE_REQUEST.md`, `STEP1_ANALYSIS.md`, `claude-code-cli/`, `samsung-agent-education2-main/`
-- Rollback 기준: 이번 루프에서 손댄 파일만 되돌리고, 기준선은 마지막 정상 배포 커밋 `b179345`로 복구한다.
-- 완료 루프: 카드형 풀페이지 레이아웃, 반자동 스크롤, 아이콘/일러스트, 하단 여백 정렬 적용 중
-- 다음 루프: 필요 시 상단/하단 카드 비율 미세 조정
-- Retry: `2`
-- fingerprint: `없음`
+- Claude 모델: `claude-sonnet-5`
+- 현재 commit: `b6a8f97`
+- 마지막 정상 commit·URL: `b6a8f97`, `https://shpeterpan.github.io/` (HTTP 200)
+- Git 상태: `main...origin/main`, tracked 변경 없음; untracked `.DS_Store`, `.tmp-*.png`, `AUTOMATION_READINESS.md`, `CHANGE_REQUEST.md`, `STEP1_ANALYSIS.md`, `claude-code-cli/`, `samsung-agent-education2-main/`
+- Rollback 기준: 이번 루프에서 수정·추가한 파일만 되돌리고, 배포 실패 시 마지막 정상 배포 커밋 `b6a8f97`로 복구한다.
+- 진행 루프: 검수 결함 6건 수정과 회귀 테스트 추가 완료, 사용자 배포 승인에 따라 commit·push·배포본 검증 진행
+- 다음 루프: 비밀정보 검사 → commit/push → HTTP 200 → 배포본 회귀
+- Retry: `1`
+- fingerprint: `없음` (6개 기존 fingerprint 제거 확인)
 - blocker: 없음
 
 ## Acceptance
@@ -58,6 +58,6 @@
 ## Recent Loops
 | Loop | 상태 | 실행 모드·모델 | 변경 파일 | 테스트 결과 | Retry | 다음 작업 |
 |---|---|---|---|---|---:|---|
+| Code Review Fix and Deploy | DEPLOY_APPROVAL_REQUIRED | `CODEX_FALLBACK` / Claude 무응답 | `index.html`, `styles.css`, `script.js`, `game-core.js`, `tests/regression.mjs`, 기록 | Node 5 checks, 375/768/1440 브라우저 회귀 `PASS` | 1 | 승인된 배포·배포본 검증 |
 | Margin Alignment Pass | ACTING | `CODEX_FALLBACK` / Claude verifier unavailable | `styles.css`, `MEMORY.md`, `AORR_LOG.md` | 로컬 HTTP, 1440/390 캡처 `PASS` | 2 | 필요 시 카드 비율 미세 조정 |
 | Icon and Illustration Pass | READY | `CODEX_FALLBACK` / Claude verifier unavailable | `index.html`, `styles.css`, `AORR_LOG.md` | desktop/mobile screenshots `PASS` | 1 | 완료 |
-| Card Snap Scroll Pass | READY | `CODEX_FALLBACK` / Claude verifier unavailable | `index.html`, `styles.css`, `script.js`, `AORR_LOG.md` | wheel/PageDown snap check `PASS` | 1 | 완료 |

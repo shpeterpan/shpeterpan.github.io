@@ -263,6 +263,12 @@ const PERK_COSTS = {
 
 const WEAPON_NAMES = ['spark', 'orbit', 'burst'];
 const ELEVATION_LIMIT = 2;
+const SURVIVOR_LIMITS = Object.freeze({
+  enemies: 240,
+  projectiles: 360,
+  waves: 16,
+  pickups: 320,
+});
 
 export class SurvivorCore {
   constructor({ storage = null, random = Math.random } = {}) {
@@ -273,12 +279,15 @@ export class SurvivorCore {
   }
 
   loadPerks() {
-    const loaded = safeStorageRead(this.storage, 'loop-engineer-survivor-perks', DEFAULT_PERKS);
+    const stored = safeStorageRead(this.storage, 'loop-engineer-survivor-perks', DEFAULT_PERKS);
+    const loaded = stored && typeof stored === 'object' && !Array.isArray(stored)
+      ? stored
+      : DEFAULT_PERKS;
     return {
-      maxHp: clamp(Number(loaded.maxHp) || 0, 0, 5),
-      attack: clamp(Number(loaded.attack) || 0, 0, 5),
-      pickup: clamp(Number(loaded.pickup) || 0, 0, 5),
-      coins: Math.max(0, Number(loaded.coins) || 0),
+      maxHp: clamp(Math.floor(Number(loaded.maxHp) || 0), 0, 5),
+      attack: clamp(Math.floor(Number(loaded.attack) || 0), 0, 5),
+      pickup: clamp(Math.floor(Number(loaded.pickup) || 0), 0, 5),
+      coins: Math.max(0, Math.floor(Number(loaded.coins) || 0)),
     };
   }
 
@@ -535,12 +544,10 @@ export class SurvivorCore {
         },
       }));
 
-    const available = shuffle([...pool, ...evolutions], this.random).filter((choice) => {
-      if (choice.id.startsWith('evolve')) {
-        return true;
-      }
-      return true;
-    });
+    const upgradeablePool = pool.filter((choice) => (
+      !WEAPON_NAMES.includes(choice.id) || this.weapons[choice.id].level < 5
+    ));
+    const available = shuffle([...upgradeablePool, ...evolutions], this.random);
 
     const selected = [];
     const used = new Set();
@@ -690,6 +697,9 @@ export class SurvivorCore {
 
     const angles = weapon.evolved ? [-0.16, 0, 0.16] : [0];
     for (const angle of angles) {
+      if (this.projectiles.length >= SURVIVOR_LIMITS.projectiles) {
+        break;
+      }
       const vx = aim.x * Math.cos(angle) - aim.y * Math.sin(angle);
       const vy = aim.x * Math.sin(angle) + aim.y * Math.cos(angle);
       this.projectiles.push({
@@ -734,6 +744,9 @@ export class SurvivorCore {
 
   fireBurst() {
     const weapon = this.weapons.burst;
+    if (this.waves.length >= SURVIVOR_LIMITS.waves) {
+      return;
+    }
     this.waves.push({
       id: `wave-${this.waveCounter += 1}`,
       radius: 18,
@@ -784,6 +797,9 @@ export class SurvivorCore {
   fireBossShot(enemy) {
     const shots = 6;
     for (let index = 0; index < shots; index += 1) {
+      if (this.projectiles.length >= SURVIVOR_LIMITS.projectiles) {
+        break;
+      }
       const angle = (Math.PI * 2 * index) / shots;
       this.projectiles.push({
         id: `boss-${this.projectileCounter += 1}`,
@@ -914,6 +930,9 @@ export class SurvivorCore {
   }
 
   spawnPickup(x, y, amount) {
+    if (this.pickups.length >= SURVIVOR_LIMITS.pickups) {
+      this.pickups.shift();
+    }
     this.pickups.push({
       id: `xp-${this.pickupsCounter += 1}`,
       x,
@@ -961,7 +980,7 @@ export class SurvivorCore {
   }
 
   spawnEnemy() {
-    if (this.bossSpawned && this.boss) {
+    if ((this.bossSpawned && this.boss) || this.enemies.length >= SURVIVOR_LIMITS.enemies) {
       return;
     }
 
@@ -1000,6 +1019,9 @@ export class SurvivorCore {
 
   spawnBoss() {
     this.bossSpawned = true;
+    if (this.enemies.length >= SURVIVOR_LIMITS.enemies) {
+      this.enemies.shift();
+    }
     this.boss = {
       id: `boss-${this.bossCounter += 1}`,
       kind: 'boss',

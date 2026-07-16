@@ -85,6 +85,7 @@ const storage = getStorage();
 
 const menuToggle = document.querySelector('.menu-toggle');
 const primaryNav = document.querySelector('#primary-nav');
+const gamesSection = document.querySelector('#games');
 const pageCards = [...document.querySelectorAll('.page-card')];
 const gameTabs = [...document.querySelectorAll('[data-game-tab]')];
 const gamePanels = [...document.querySelectorAll('[data-game-panel]')];
@@ -178,9 +179,9 @@ function startSnakeTimer() {
     snakeLastSpeed = snake.speedMs;
     snakeTimerId = window.setInterval(() => {
       const beforeSpeed = snake.speedMs;
+      const previousHighScore = snake.highScore;
       const result = snake.step();
-      if (snake.highScore < snake.score) {
-        snake.highScore = snake.score;
+      if (snake.highScore > previousHighScore) {
         writeNumber(storage, STORAGE_KEYS.snakeHighScore, snake.highScore);
       }
 
@@ -594,6 +595,36 @@ function moveOneCard(direction) {
   }
 
   const currentIndex = getPageCardIndexFromScroll();
+  const currentCard = pageCards[currentIndex];
+  const cardTop = Math.max(0, currentCard.offsetTop - 92);
+  const cardBottom = currentCard.offsetTop + currentCard.offsetHeight;
+  const viewportBottom = window.scrollY + window.innerHeight;
+  const innerStep = Math.max(240, window.innerHeight * 0.78);
+
+  if (direction > 0 && viewportBottom < cardBottom - 24) {
+    pageScrollLock = true;
+    window.scrollTo({
+      top: Math.min(window.scrollY + innerStep, cardBottom - window.innerHeight),
+      behavior: 'smooth',
+    });
+    window.setTimeout(() => {
+      pageScrollLock = false;
+    }, 500);
+    return;
+  }
+
+  if (direction < 0 && window.scrollY > cardTop + 24) {
+    pageScrollLock = true;
+    window.scrollTo({
+      top: Math.max(window.scrollY - innerStep, cardTop),
+      behavior: 'smooth',
+    });
+    window.setTimeout(() => {
+      pageScrollLock = false;
+    }, 500);
+    return;
+  }
+
   const nextIndex = clamp(currentIndex + direction, 0, pageCards.length - 1);
   if (nextIndex === currentIndex) {
     return;
@@ -608,6 +639,11 @@ function moveOneCard(direction) {
 
 function handlePageScrollIntent(direction) {
   moveOneCard(direction);
+}
+
+function isGamesSectionVisible() {
+  const rect = gamesSection.getBoundingClientRect();
+  return rect.top < window.innerHeight * 0.78 && rect.bottom > window.innerHeight * 0.22;
 }
 
 function handleKeydown(event) {
@@ -627,7 +663,7 @@ function handleKeydown(event) {
     d: 'right',
   };
 
-  if (directionMap[key]) {
+  if (directionMap[key] && isGamesSectionVisible()) {
     event.preventDefault();
     if (activeGame === 'snake') {
       handleDirection(directionMap[key]);
@@ -638,7 +674,7 @@ function handleKeydown(event) {
     return;
   }
 
-  if (key === ' ' || key === 'spacebar') {
+  if ((key === ' ' || key === 'spacebar') && isGamesSectionVisible()) {
     event.preventDefault();
     if (activeGame === 'snake') {
       handleSnakeAction('pause');

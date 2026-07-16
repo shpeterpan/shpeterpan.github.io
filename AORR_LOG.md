@@ -1,5 +1,16 @@
 # AORR Log
 
+## 2026-07-16 Code Review Fix and Deploy
+
+- Mode: `CODEX_FALLBACK`; `claude-sonnet-5` baseline verification produced no output for about 90 seconds and was terminated, so Codex ran the unchanged validation scope.
+- Baseline: reproduced `KEYBOARD_GLOBAL_CAPTURE`, `OVERSIZED_CARD_SKIP`, `CORRUPT_STORAGE_CRASH`, `SNAKE_HIGHSCORE_NOT_PERSISTED`, `MAXED_CHOICE_NOOP`, and `SURVIVOR_OBJECT_UNBOUNDED` against commit `b6a8f97`.
+- Act: limited game keys to the visible Games section, preserved internal scrolling for oversized cards, validated stored perk objects, corrected Snake high-score persistence ordering, removed max-level no-op weapon choices, and capped Survivor runtime objects.
+- Act: changed scroll snapping to `proximity`, added direction-button labels and an inline favicon, and added `tests/regression.mjs` with five deterministic regression groups.
+- Retry 1: the first object-cap test found 241 enemies because the boss was added after the 240 normal-enemy cap; `spawnBoss()` now removes the oldest normal enemy before adding the boss.
+- Verify: `node --check script.js`, `node --check game-core.js`, `node tests/regression.mjs`, and `git diff --check` passed.
+- Verify: browser checks at 375x812, 768x1024, and 1440x900 showed no horizontal overflow, no console warnings/errors, normal Survivor start, page scrolling outside Games, game input inside Games, and no oversized-card content skip.
+- Gate: local verification `PASS`; state moved to `DEPLOY_APPROVAL_REQUIRED`, and the user's current request explicitly approves commit, push, and deployment.
+
 ## 2026-07-16 Bottom Spacing Correction
 
 - Mode: `CODEX_FALLBACK`; Codex handled the last spacing correction directly in this session.
