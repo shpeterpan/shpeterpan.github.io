@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Loop Engineer | Static Portfolio & Games</title>
-  <meta name="description" content="정적 반응형 포트폴리오와 분리된 Snake, 뱀서 모드를 제공하는 사이트입니다.">
+  <title>Loop Engineer | Portfolio, Games, Static UI</title>
+  <meta name="description" content="정적 포트폴리오와 분리된 Snake, 뱀서 모드를 하나의 반응형 페이지에서 보여주는 사이트입니다.">
   <link rel="stylesheet" href="styles.css">
   <script type="module" src="script.js" defer></script>
 </head>
@@ -42,43 +42,81 @@
   <main id="main">
     <section id="home" class="hero shell">
       <div class="hero-copy panel">
-        <p class="eyebrow">Home</p>
-        <h1>정적 호스팅에 맞춘 프로페셔널 사이트와 분리된 게임 허브.</h1>
+        <p class="eyebrow">Build / Play / Ship</p>
+        <h1>작게 설계하고, 빠르게 검증하고, 끝까지 동작하게.</h1>
         <p class="lede">
-          승인된 사실만 채우는 포트폴리오 뼈대, 반응형 내비게이션, 그리고 Snake와 뱀서 모드를
-          각각 독립된 상태로 실행하는 게임 영역을 한 페이지에 담았습니다.
+          Loop Engineer는 정적 포트폴리오와 게임 허브를 하나의 페이지로 엮은 실험형 사이트입니다.
+          GitHub Pages에서 바로 열리고, 반응형 내비게이션과 독립된 게임 상태를 함께 제공합니다.
         </p>
         <div class="hero-actions">
-          <a class="primary-action" href="#games">게임 바로가기</a>
-          <a class="secondary-action" href="#about">소개 보기</a>
+          <a class="primary-action" href="#projects">작업 둘러보기</a>
+          <a class="secondary-action" href="#games">게임 시작하기</a>
         </div>
       </div>
 
-      <aside class="hero-panel panel" aria-label="요약 상태">
-        <p class="eyebrow">Project Settings</p>
-        <h2>기록된 게임 추가 기능</h2>
-        <ul class="status-list">
-          <li>기본 지렁이 게임과 분리된 뱀서 모드</li>
-          <li>5분 런, 보스 1종, 무기 3종·진화, 제한된 영구 강화</li>
-          <li>비승인 정보는 공개하지 않음</li>
-        </ul>
+      <aside class="hero-panel" aria-label="요약 상태">
+        <article class="panel hero-spotlight">
+          <p class="eyebrow">At a glance</p>
+          <h2>반응형 셸, 두 개의 게임 모드, 하나의 정적 배포</h2>
+          <p>
+            카드와 패널을 넉넉하게 비워 두고, 주요 정보만 크게 보여주는 금융앱형 구조로 정리했습니다.
+          </p>
+          <ul class="hero-tags" aria-label="핵심 기능">
+            <li>Static Pages</li>
+            <li>Responsive Nav</li>
+            <li>Game Hub</li>
+          </ul>
+        </article>
+
+        <div class="hero-metrics">
+          <article class="panel metric-card">
+            <p class="metric-label">Modes</p>
+            <strong>2</strong>
+            <span>Snake와 Survivors</span>
+          </article>
+          <article class="panel metric-card">
+            <p class="metric-label">Inputs</p>
+            <strong>3</strong>
+            <span>Keyboard, WASD, touch buttons</span>
+          </article>
+          <article class="panel metric-card">
+            <p class="metric-label">Run</p>
+            <strong>5m</strong>
+            <span>Survivor mode time limit</span>
+          </article>
+        </div>
       </aside>
     </section>
 
     <section id="about" class="section shell">
       <div class="section-heading">
         <p class="eyebrow">About</p>
-        <h2>검증된 내용만 남기기 위한 정보 영역</h2>
+        <h2>아이디어를 화면과 동작으로 연결합니다</h2>
+        <p class="section-summary">정적 구조와 게임 동작을 함께 다루며, 읽기 쉬운 정보 우선순위를 유지합니다.</p>
       </div>
 
-      <div class="card-grid two-up">
-        <article class="card">
-          <h3>프로필</h3>
-          <p>공개 가능한 이름, 직함, 요약 소개를 입력할 자리입니다.</p>
+      <div class="feature-grid about-grid">
+        <article class="card feature-card">
+          <p class="card-label">Product-minded build</p>
+          <h3>보이는 결과물뿐 아니라, 동작의 안정성까지 함께 설계합니다.</h3>
+          <p>
+            정적 호스팅, 반응형 내비게이션, 게임 입력, 상태 전환처럼 사용자가 실제로 만지는 부분을
+            먼저 정리합니다.
+          </p>
         </article>
-        <article class="card">
-          <h3>원칙</h3>
-          <p>미승인 경력이나 개인정보는 생성하지 않고, 공개 승인된 자료만 반영합니다.</p>
+        <article class="card feature-card">
+          <p class="card-label">Static, but alive</p>
+          <h3>설치는 없고, 대신 바로 열리며 바로 작동합니다.</h3>
+          <p>
+            페이지는 가볍게 유지하고, 모드별 상태는 분리해두어 서로의 입력과 렌더링을 방해하지 않게 했습니다.
+          </p>
+        </article>
+        <article class="card feature-card">
+          <p class="card-label">Design signal</p>
+          <h3>여백이 큰 카드와 또렷한 타이포로 우선순위를 분명히 보여줍니다.</h3>
+          <p>
+            Kbank처럼 정돈된 정보 구조와, KakaoBank처럼 시원한 첫인상을 함께 참고한 구성입니다.
+          </p>
         </article>
       </div>
     </section>
@@ -86,24 +124,36 @@
     <section id="projects" class="section shell">
       <div class="section-heading">
         <p class="eyebrow">Projects</p>
-        <h2>확인 가능한 프로젝트만 채우는 카드</h2>
+        <h2>지금 이 사이트에서 바로 확인할 수 있는 작업</h2>
       </div>
 
-      <div class="card-grid">
-        <article class="card accent-card">
+      <div class="project-grid">
+        <article class="card project-card project-card--feature">
           <p class="card-label">Project 01</p>
-          <h3>공개 전</h3>
-          <p>확인된 프로젝트 설명과 링크만 넣는 영역입니다.</p>
+          <h3>Portfolio Shell</h3>
+          <p>
+            정적 HTML, CSS, JavaScript만으로 동작하는 반응형 포트폴리오 셸입니다.
+            상단 내비게이션, 섹션 앵커, 접근성 포커스, GitHub Pages 호환 경로를 유지합니다.
+          </p>
+          <ul class="tag-list">
+            <li>Static</li>
+            <li>Responsive</li>
+            <li>Pages-ready</li>
+          </ul>
         </article>
-        <article class="card accent-card">
+
+        <article class="card project-card">
           <p class="card-label">Project 02</p>
-          <h3>공개 전</h3>
-          <p>이미지, 저장소, 결과물이 승인된 경우에만 추가합니다.</p>
+          <h3>Snake Engine</h3>
+          <p>점수, 최고 점수, 일시정지, 재시작, 방향키/WASD와 터치 버튼을 분리된 상태로 처리합니다.</p>
+          <a class="card-link" href="#games">게임 패널 보기</a>
         </article>
-        <article class="card accent-card">
+
+        <article class="card project-card">
           <p class="card-label">Project 03</p>
-          <h3>공개 전</h3>
-          <p>정적 페이지와 상대 경로만으로 동작하는 항목을 우선 배치합니다.</p>
+          <h3>Survivor Mode</h3>
+          <p>5분 런, 자동 공격, 적 웨이브, 경험치, 레벨업 선택, 보스, 영구 강화와 초기화를 제공합니다.</p>
+          <a class="card-link" href="#games">모드 상세 보기</a>
         </article>
       </div>
     </section>
@@ -111,19 +161,24 @@
     <section id="experience" class="section shell">
       <div class="section-heading">
         <p class="eyebrow">Experience</p>
-        <h2>연도·회사·역할은 승인 후 채우는 타임라인</h2>
+        <h2>작업 로그로 남기는 빌드 히스토리</h2>
       </div>
 
       <div class="timeline">
-        <article class="timeline-item card">
-          <p class="card-label">2026 · 승인 전</p>
-          <h3>공개 전</h3>
-          <p>승인된 경력만 공개하고, 미확정 경력은 표시하지 않습니다.</p>
+        <article class="timeline-item card timeline-item--featured">
+          <p class="card-label">2026 · UI pass</p>
+          <h3>금융앱형 배치와 유리질감 톤을 정리</h3>
+          <p>크고 작은 카드의 비율을 조절해 정보 우선순위를 선명하게 만들고, 상단 바는 밝은 유리 레이어로 유지했습니다.</p>
         </article>
         <article class="timeline-item card">
-          <p class="card-label">2025 · 승인 전</p>
-          <h3>공개 전</h3>
-          <p>사용자 확인이 끝난 뒤에만 상세 설명을 추가합니다.</p>
+          <p class="card-label">2026 · Game hub</p>
+          <h3>Snake와 Survivor를 분리된 상태로 유지</h3>
+          <p>게임 입력과 UI 입력이 서로 섞이지 않도록 탭, 패널, 캔버스 상태를 독립적으로 다룹니다.</p>
+        </article>
+        <article class="timeline-item card">
+          <p class="card-label">2026 · Pages</p>
+          <h3>빌드 없이 배포 가능한 정적 구조 유지</h3>
+          <p>상대 경로와 단일 페이지 구조를 중심으로 GitHub Pages 호환성을 계속 지킵니다.</p>
         </article>
       </div>
     </section>
@@ -131,17 +186,17 @@
     <section id="research" class="section shell">
       <div class="section-heading">
         <p class="eyebrow">Research</p>
-        <h2>확인 가능한 연구/실험 링크 전용 영역</h2>
+        <h2>실험하면서 지킨 설계 원칙</h2>
       </div>
 
-      <div class="card-grid two-up">
-        <article class="card">
-          <h3>노트</h3>
-          <p>연구 노트, 발표자료, 논문 링크를 넣는 자리입니다.</p>
+      <div class="card-grid two-up research-grid">
+        <article class="card research-card">
+          <h3>State separation</h3>
+          <p>Snake와 Survivor는 상태와 입력을 분리해 서로의 진행을 방해하지 않도록 설계했습니다.</p>
         </article>
-        <article class="card">
-          <h3>방법</h3>
-          <p>링크의 유효성만 검증하고, 내용 자체는 승인된 자료에 한해 노출합니다.</p>
+        <article class="card research-card">
+          <h3>Static-first delivery</h3>
+          <p>추가 도구 없이도 열리는 정적 구조를 유지하고, 페이지 성능과 호환성을 먼저 봅니다.</p>
         </article>
       </div>
     </section>
@@ -149,21 +204,26 @@
     <section id="contact" class="section shell">
       <div class="section-heading">
         <p class="eyebrow">Contact</p>
-        <h2>연락 정보는 승인 대기 상태로 보존</h2>
+        <h2>연락처 대신, 지금은 결과물로 이야기합니다</h2>
       </div>
 
-      <div class="contact-grid">
-        <article class="card">
-          <h3>Email</h3>
-          <p>공개 전</p>
+      <div class="contact-grid contact-grid--featured">
+        <article class="card contact-card contact-card--main">
+          <p class="card-label">Live</p>
+          <h3>https://shpeterpan.github.io/</h3>
+          <p>현재 페이지의 공개 주소입니다. 정적 호스팅과 반응형 레이아웃을 바로 확인할 수 있습니다.</p>
+          <a class="card-link" href="https://shpeterpan.github.io/" target="_blank" rel="noreferrer">사이트 열기</a>
         </article>
-        <article class="card">
-          <h3>Links</h3>
-          <p>GitHub, LinkedIn, Portfolio 링크만 배치합니다.</p>
+        <article class="card contact-card">
+          <p class="card-label">Source</p>
+          <h3>GitHub repository</h3>
+          <p>수정과 배포의 기준이 되는 저장소입니다. 현재 구조와 스크립트가 모두 들어 있습니다.</p>
+          <a class="card-link" href="https://github.com/shpeterpan/shpeterpan.github.io" target="_blank" rel="noreferrer">저장소 보기</a>
         </article>
-        <article class="card">
-          <h3>Availability</h3>
-          <p>정적 사이트와 GitHub Pages 기준으로만 운영합니다.</p>
+        <article class="card contact-card">
+          <p class="card-label">Stack</p>
+          <h3>HTML · CSS · JavaScript · Canvas</h3>
+          <p>빌드 도구 없이도 동작하는 가장 단순한 조합으로 구성했습니다.</p>
         </article>
       </div>
     </section>

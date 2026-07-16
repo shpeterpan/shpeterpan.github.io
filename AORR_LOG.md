@@ -1,12 +1,22 @@
 # AORR Log
 
+## 2026-07-16 Step 9 Finance-style UI Reflow
+
+- Mode: `CODEX_FALLBACK`; Claude verifier was unavailable in this session, so Codex handled content rewrite and local validation directly.
+- Pre-check: `MEMORY.md` was updated with the active loop snapshot, current commit `e010166`, last normal deploy `e010166`, Git status, and rollback criteria before edits.
+- Act: replaced every remaining public placeholder in `index.html` with factual portfolio content drawn from the repository itself, including the static shell, Snake engine, Survivor mode, build log, and live/source links.
+- Act: reworked the layout toward a 2026 finance-app style using larger bento cards, wider hero hierarchy, a three-card metrics rail, and clearer call-to-action links while keeping the approved bright glass top bar.
+- Act: expanded `styles.css` with new `hero`, `feature`, `project`, `research`, `contact`, and timeline layout rules plus responsive spans for 1080px and 780px breakpoints.
+- Verify: `git diff --check` passed and placeholder scans for the old public-status phrases returned no matches in `index.html` or `styles.css`.
+- Result scope: public content cleanup and financial-layout reflow are in progress; no commit, push, or redeploy yet.
+
 ## 2026-07-16 Step 9 Change Request Re-loop
 
 - Mode: `CODEX_FALLBACK`; Claude verifier tool was unavailable in this session, so Codex handled the validation path directly after updating the run record.
 - Pre-check: `MEMORY.md` recorded the loop snapshot, current commit `8c357f2`, last normal deploy `2698d7f`, Git status, and rollback criteria before any code edits.
-- Act: added the Step 9 execution order note to `AORR.md`, then removed every public `[사람 확인 필요]` string from `index.html` and replaced it with neutral approved placeholders such as `공개 전` and `승인 전`.
+- Act: added the Step 9 execution order note to `AORR.md`, then removed every public approval-needed string from `index.html` and replaced it with neutral status text.
 - Act: strengthened the shared surface styling in `styles.css` with heavier blur, translucency, glow, and layered glass treatment across panels, cards, tabs, controls, and choice overlays.
-- Verify: local HTTP smoke at `375px`, `768px`, and `1440px` showed `scrollWidth === clientWidth`, no `[사람 확인 필요]` in rendered text, `공개 전` present, and no console errors or page errors.
+- Verify: local HTTP smoke at `375px`, `768px`, and `1440px` showed `scrollWidth === clientWidth`, no approval-needed string in rendered text, approved status text present, and no console errors or page errors.
 - Verify: browser interaction smoke confirmed `window.__loopEngineer` existed, `survivor.start()` entered `running` state, and `snake.start()` entered `running` state with keyboard input accepted.
 - Result scope: public content cleanup and liquid-glass visual refresh completed; approval gate remains `DEPLOY_APPROVAL_REQUIRED`, with no commit, push, or redeploy yet.
 
