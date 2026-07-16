@@ -10,6 +10,12 @@
 - Verify: browser interaction smoke confirmed `window.__loopEngineer` existed, `survivor.start()` entered `running` state, and `snake.start()` entered `running` state with keyboard input accepted.
 - Result scope: public content cleanup and liquid-glass visual refresh completed; approval gate remains `DEPLOY_APPROVAL_REQUIRED`, with no commit, push, or redeploy yet.
 
+## 2026-07-16 Step 9 Deployment Closeout
+
+- Deploy: committed and pushed `0cf633f` to `main`.
+- Deploy verify: `https://shpeterpan.github.io/` returned HTTP `200` with GitHub Pages headers after the push.
+- Result scope: loop closed as `DEPLOYED`; no rollback or follow-up edits required.
+
 ## 2026-07-16 Survivor Mode Interaction Fix
 
 - Mode: `CODEX_FALLBACK`; `claude-sonnet-5` verifier returned no report in two non-interactive attempts, so Codex ran the unchanged pre/post checks.

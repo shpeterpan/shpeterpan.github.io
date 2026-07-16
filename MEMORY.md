@@ -22,12 +22,12 @@
 - Last test: 배포본 HTTP 200, 뱀서 선택 클릭·재개·콘솔 `PASS`
 
 ## Current State
-- 상태: `DEPLOY_APPROVAL_REQUIRED`
+- 상태: `DEPLOYED`
 - 실행 모드: `CODEX_FALLBACK`
 - Claude 모델: `claude-sonnet-5`(문서상 검증 대상, 이 세션에서는 직접 호출 불가)
-- 현재 commit: `8c357f2`
+- 현재 commit: `0cf633f`
 - 마지막 정상 commit·URL: `2698d7f`, `https://shpeterpan.github.io/`
-- Git 상태: `main`, modified `AORR.md`, `AORR_LOG.md`, `MEMORY.md`, `index.html`, `styles.css`; untracked `.DS_Store`, `AUTOMATION_READINESS.md`, `CHANGE_REQUEST.md`, `STEP1_ANALYSIS.md`, `claude-code-cli/`, `samsung-agent-education2-main/`
+- Git 상태: `main`, modified `MEMORY.md`; untracked `.DS_Store`, `AUTOMATION_READINESS.md`, `CHANGE_REQUEST.md`, `STEP1_ANALYSIS.md`, `claude-code-cli/`, `samsung-agent-education2-main/`
 - Rollback 기준: 이번 루프에서 손댄 파일만 되돌리고, 기준선은 마지막 정상 배포 커밋 `2698d7f`로 복구한다.
 - 완료 루프: 뱀서 모드 hotfix commit/push/Pages 회귀 검증 완료
 - 다음 루프: 사용자 요청 시 유지보수
