@@ -10,7 +10,9 @@
 - Retry 1: `FIRST_INPUT_RESET` showed that starting from a direction input cleared that same input; reordered run initialization before applying the movement vector.
 - Verify: all three deterministic core checks passed; ordinary upgrade click closed the overlay and resumed the run.
 - Verify: local HTTP passed at `375px`, `768px`, and `1440px` with no horizontal overflow, visible action controls, and zero console warnings/errors.
-- Result scope: local hotfix `PASS` after one Retry; commit, push, and Pages redeployment require user approval.
+- Deploy: pushed hotfix commit `2698d7f` to `main`; GitHub Pages reached `built` and page/assets returned HTTP 200.
+- Deploy verify: Claude Sonnet 5 returned no final report, so Codex browser fallback confirmed three choices, no backdrop blur, ordinary choice click, resumed run, and zero console warnings/errors.
+- Result scope: hotfix deployment `PASS` after one Retry; public URL is `https://shpeterpan.github.io/`.
 
 ## 2026-07-16 Step 7 Full Implementation
 
