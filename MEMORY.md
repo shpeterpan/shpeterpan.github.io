@@ -22,16 +22,16 @@
 - Last test: 배포본 HTTP 200, 뱀서 선택 클릭·재개·콘솔 `PASS`
 
 ## Current State
-- 상태: `DEPLOYED`
+- 상태: `ACTING`
 - 실행 모드: `CODEX_FALLBACK`
 - Claude 모델: `claude-sonnet-5`(문서상 검증 대상, 이 세션에서는 직접 호출 불가)
 - 현재 commit: `b179345`
 - 마지막 정상 commit·URL: `b179345`, `https://shpeterpan.github.io/`
-- Git 상태: `main`, modified `MEMORY.md`; untracked `.DS_Store`, `AUTOMATION_READINESS.md`, `CHANGE_REQUEST.md`, `STEP1_ANALYSIS.md`, `claude-code-cli/`, `samsung-agent-education2-main/`
+- Git 상태: `main`, modified `AORR_LOG.md`, `MEMORY.md`, `index.html`, `script.js`, `styles.css`; untracked `.DS_Store`, `AUTOMATION_READINESS.md`, `CHANGE_REQUEST.md`, `STEP1_ANALYSIS.md`, `claude-code-cli/`, `samsung-agent-education2-main/`
 - Rollback 기준: 이번 루프에서 손댄 파일만 되돌리고, 기준선은 마지막 정상 배포 커밋 `b179345`로 복구한다.
-- 완료 루프: 공개 콘텐츠 정리, 금융앱형 배치, 배포 완료
-- 다음 루프: 사용자 요청 시 유지보수
-- Retry: `1`
+- 완료 루프: 카드형 풀페이지 레이아웃, 반자동 스크롤, 아이콘/일러스트, 하단 여백 정렬 적용 중
+- 다음 루프: 필요 시 상단/하단 카드 비율 미세 조정
+- Retry: `2`
 - fingerprint: `없음`
 - blocker: 없음
 
@@ -58,9 +58,6 @@
 ## Recent Loops
 | Loop | 상태 | 실행 모드·모델 | 변경 파일 | 테스트 결과 | Retry | 다음 작업 |
 |---|---|---|---|---|---:|---|
-| 뱀서 상호작용 수정 | DEPLOYED | `CODEX_FALLBACK` / Claude 무응답 | `game-core.js`, `script.js`, `styles.css` | 로컬·Pages HTTP·선택 클릭·콘솔 `PASS` | 1 | 완료 |
-| Step 7 전체 구현 | READY | `CODEX_WORKER + CLAUDE_VERIFIER` / `claude-sonnet-5` | `index.html`, `styles.css`, `script.js`, `game-core.js` | 로컬 HTTP, 375/768/1440, 링크, 콘솔, Snake, 뱀서 모드 `PASS` | 0 | 사용자 승인 후 배포 |
-| Step 3 설계 | READY | `CODEX_WORKER + CLAUDE_VERIFIER` / `claude-sonnet-5` | `AORR.md`, `MEMORY.md` | 미실행 | 0 | 승인 후 기준선 테스트 |
-| Step 1 분석 | READY | 문서 분석 | `STEP1_ANALYSIS.md` | 미실행 | 0 | 공개 범위·보존 목록 확정 |
-| Step 4 복구 | READY | 문서 갱신 | `MEMORY.md` | 미실행 | 0 | 현재 상태 유지 |
-| 2026 UI 재배치 | DEPLOYED | `CODEX_FALLBACK` / `claude-sonnet-5` | `index.html`, `styles.css` | 로컬 HTTP, 공개 URL 200 | 0 | 완료 |
+| Margin Alignment Pass | ACTING | `CODEX_FALLBACK` / Claude verifier unavailable | `styles.css`, `MEMORY.md`, `AORR_LOG.md` | 로컬 HTTP, 1440/390 캡처 `PASS` | 2 | 필요 시 카드 비율 미세 조정 |
+| Icon and Illustration Pass | READY | `CODEX_FALLBACK` / Claude verifier unavailable | `index.html`, `styles.css`, `AORR_LOG.md` | desktop/mobile screenshots `PASS` | 1 | 완료 |
+| Card Snap Scroll Pass | READY | `CODEX_FALLBACK` / Claude verifier unavailable | `index.html`, `styles.css`, `script.js`, `AORR_LOG.md` | wheel/PageDown snap check `PASS` | 1 | 완료 |

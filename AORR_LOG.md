@@ -1,5 +1,49 @@
 # AORR Log
 
+## 2026-07-16 Bottom Spacing Correction
+
+- Mode: `CODEX_FALLBACK`; Codex handled the last spacing correction directly in this session.
+- Pre-check: `MEMORY.md` was updated with the active loop snapshot, current commit `b179345`, last normal deploy `b179345`, Git status, and rollback criteria before the patch.
+- Act: reduced the page-card stretch behavior, increased bottom breathing room, and extended the main container's outer bottom padding so the cards read as framed panels rather than full-height slabs.
+- Verify: desktop `1440x2200` and mobile `390x1400` screenshots both showed visible bottom spacing below the first page card and consistent outer margins on all sides.
+- Result scope: bottom spacing correction is complete locally; no commit, push, or redeploy was performed.
+
+## 2026-07-16 Margin Alignment Pass
+
+- Mode: `CODEX_FALLBACK`; Codex handled the spacing normalization directly in this session.
+- Pre-check: `MEMORY.md` was updated with the active loop snapshot, current commit `b179345`, last normal deploy `b179345`, Git status, and rollback criteria before edits.
+- Act: removed the extra section-level top and bottom padding that had been stacking on top of the page-card padding and making the four edges feel uneven.
+- Verify: desktop preview showed the large card edges reading more consistently after the padding normalization.
+- Result scope: margin alignment is complete locally; no commit, push, or redeploy was performed in this step.
+
+## 2026-07-16 Icon and Illustration Pass
+
+- Mode: `CODEX_FALLBACK`; Codex handled the visual asset pass directly in this session.
+- Pre-check: `MEMORY.md` was updated with the active loop snapshot, current commit `b179345`, last normal deploy `b179345`, Git status, and rollback criteria before edits.
+- Act: added a self-contained abstract SVG illustration to the hero area and introduced compact icon badges for the informational rail cards across the page.
+- Act: kept the asset system dependency-free so the page remains static-hosting friendly, while leaving a clear path to swap in open-source illustration/icon libraries later.
+- Verify: desktop and mobile screenshots showed the new illustration and icon badges fitting the glass-card language without breaking layout.
+- Result scope: visual asset enrichment completed locally; no commit, push, or redeploy was performed in this step.
+
+## 2026-07-16 Card Snap Scroll Pass
+
+- Mode: `CODEX_FALLBACK`; Codex handled the layout and interaction pass directly in this session.
+- Pre-check: `MEMORY.md` was updated with the active loop snapshot, current commit `b179345`, last normal deploy `b179345`, Git status, and rollback criteria before edits.
+- Act: added `page-rail` blocks to the main sections in `index.html` so the large page cards have real content instead of empty vertical space.
+- Act: turned `html`/`.page-card` into a snap-scrolling flow in `styles.css` and added a lightweight wheel/PageDown controller in `script.js` so one section advances at a time.
+- Verify: local browser checks confirmed a one-section jump on mouse wheel and `PageDown`, with the next snap landing on the following card.
+- Verify: desktop and mobile screenshots showed the new filler rails and the fuller page-card rhythm without horizontal overflow.
+- Result scope: snap scrolling and whitespace fill are complete locally; no commit, push, or redeploy was performed in this step.
+
+## 2026-07-16 Full-Card Section Reflow
+
+- Mode: `CODEX_FALLBACK`; Claude verifier was not used in this session, so Codex handled layout changes and local preview validation directly.
+- Pre-check: `MEMORY.md` was updated with the active loop snapshot, current commit `b179345`, last normal deploy `b179345`, Git status, and rollback criteria before edits.
+- Act: marked every major section in `index.html` with `page-card` so the page reads as a series of large full-height cards rather than a dense bento layout.
+- Act: compressed the desktop grids in `styles.css` into a single-column card flow for About, Projects, Experience, Research, Contact, and Games while preserving the bright glass top bar and game panels.
+- Verify: `git diff --check` passed and desktop/mobile screenshots showed the intended one-card-per-section rhythm without horizontal overflow.
+- Result scope: local reflow completed; no commit, push, or redeploy was performed for this iteration.
+
 ## 2026-07-16 Deployment Closeout
 
 - Deploy: committed and pushed `b179345` to `main`.

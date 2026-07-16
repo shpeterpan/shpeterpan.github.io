@@ -85,6 +85,7 @@ const storage = getStorage();
 
 const menuToggle = document.querySelector('.menu-toggle');
 const primaryNav = document.querySelector('#primary-nav');
+const pageCards = [...document.querySelectorAll('.page-card')];
 const gameTabs = [...document.querySelectorAll('[data-game-tab]')];
 const gamePanels = [...document.querySelectorAll('[data-game-panel]')];
 const snakePanel = document.querySelector('[data-game-panel="snake"]');
@@ -114,6 +115,7 @@ snake.highScore = readNumber(storage, STORAGE_KEYS.snakeHighScore, snake.highSco
 
 let activeGame = 'snake';
 let navOpen = false;
+let pageScrollLock = false;
 let snakeTimerId = null;
 let snakeLastSpeed = snake.speedMs;
 let survivorFrameId = 0;
@@ -554,8 +556,62 @@ function clearSurvivorMovement() {
   survivor.stopMovement();
 }
 
+function isEditableTarget(target) {
+  return target instanceof HTMLInputElement
+    || target instanceof HTMLTextAreaElement
+    || target instanceof HTMLSelectElement
+    || target instanceof HTMLButtonElement
+    || target instanceof HTMLAnchorElement
+    || target instanceof HTMLElement && target.isContentEditable;
+}
+
+function getPageCardIndexFromScroll() {
+  const offset = window.scrollY + 140;
+  let index = 0;
+
+  pageCards.forEach((card, candidateIndex) => {
+    const top = card.offsetTop;
+    if (offset >= top - 2) {
+      index = candidateIndex;
+    }
+  });
+
+  return index;
+}
+
+function scrollToPageCard(index) {
+  if (!pageCards.length) {
+    return;
+  }
+
+  const clampedIndex = clamp(index, 0, pageCards.length - 1);
+  pageCards[clampedIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function moveOneCard(direction) {
+  if (pageScrollLock || pageCards.length === 0) {
+    return;
+  }
+
+  const currentIndex = getPageCardIndexFromScroll();
+  const nextIndex = clamp(currentIndex + direction, 0, pageCards.length - 1);
+  if (nextIndex === currentIndex) {
+    return;
+  }
+
+  pageScrollLock = true;
+  scrollToPageCard(nextIndex);
+  window.setTimeout(() => {
+    pageScrollLock = false;
+  }, 750);
+}
+
+function handlePageScrollIntent(direction) {
+  moveOneCard(direction);
+}
+
 function handleKeydown(event) {
-  if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
+  if (isEditableTarget(event.target)) {
     return;
   }
 
@@ -594,6 +650,18 @@ function handleKeydown(event) {
 
   if (key === 'escape') {
     closeNav();
+    return;
+  }
+
+  if (key === 'pagedown' || key === ' ' || key === 'spacebar') {
+    event.preventDefault();
+    handlePageScrollIntent(1);
+    return;
+  }
+
+  if (key === 'pageup') {
+    event.preventDefault();
+    handlePageScrollIntent(-1);
   }
 }
 
@@ -661,6 +729,18 @@ primaryNav.addEventListener('click', (event) => {
 
 window.addEventListener('keydown', handleKeydown);
 window.addEventListener('keyup', handleKeyup);
+window.addEventListener('wheel', (event) => {
+  if (Math.abs(event.deltaY) < 24 || event.ctrlKey || event.metaKey || pageScrollLock) {
+    return;
+  }
+
+  if (isEditableTarget(event.target)) {
+    return;
+  }
+
+  event.preventDefault();
+  handlePageScrollIntent(event.deltaY > 0 ? 1 : -1);
+}, { passive: false });
 window.addEventListener('blur', clearSurvivorMovement);
 window.addEventListener('resize', () => {
   if (!window.matchMedia('(max-width: 720px)').matches) {

@@ -30,6 +30,8 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 92px;
 }
 
 body {
@@ -102,6 +104,12 @@ button {
 .shell {
   width: var(--shell);
   margin: 0 auto;
+}
+
+main {
+  display: grid;
+  gap: 0;
+  padding: 18px 0 72px;
 }
 
 .skip-link {
@@ -244,9 +252,91 @@ button {
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
-.hero,
-.section {
-  padding-top: 28px;
+.page-card {
+  position: relative;
+  margin: 22px auto 28px;
+  min-height: calc(100svh - 176px);
+  padding: clamp(24px, 3.2vw, 40px);
+  padding-bottom: clamp(48px, 5.2vw, 84px);
+  border-radius: calc(var(--radius-xl) + 8px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05)),
+    rgba(14, 24, 38, 0.8);
+  border: 1px solid rgba(232, 244, 255, 0.22);
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  justify-content: flex-start;
+}
+
+.page-card:last-child {
+  margin-bottom: 40px;
+}
+
+.page-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.14), transparent 34%),
+    radial-gradient(circle at top right, rgba(127, 205, 255, 0.12), transparent 30%);
+  opacity: 0.9;
+}
+
+.page-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.page-rail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.rail-card {
+  min-height: 160px;
+  padding: 20px;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.rail-card h3 {
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+}
+
+.rail-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.68;
+}
+
+.rail-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  color: #07101b;
+  background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.rail-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .hero {
@@ -254,7 +344,7 @@ button {
   grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.9fr);
   gap: 18px;
   align-items: stretch;
-  padding-bottom: 8px;
+  padding-bottom: 0;
 }
 
 .panel,
@@ -432,6 +522,11 @@ button {
   align-self: end;
 }
 
+.hero-copy {
+  display: grid;
+  align-content: start;
+}
+
 .hero-spotlight {
   padding: 26px;
 }
@@ -444,6 +539,59 @@ button {
 .hero-spotlight p {
   margin: 12px 0 0;
   color: var(--muted);
+}
+
+.hero-visual {
+  padding: 22px;
+  display: grid;
+  gap: 16px;
+}
+
+.hero-visual-copy h3 {
+  margin: 0;
+  max-width: 15ch;
+  font-size: clamp(1.1rem, 1.7vw, 1.45rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.hero-visual-copy p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.66;
+}
+
+.hero-illustration {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-microgrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.micro-card {
+  min-height: 124px;
+  padding: 16px;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.micro-card h3 {
+  margin: 0;
+  font-size: clamp(0.98rem, 1.5vw, 1.18rem);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+}
+
+.micro-card .card-label {
+  margin-bottom: 4px;
 }
 
 .hero-tags,
@@ -510,7 +658,7 @@ button {
 }
 
 .section {
-  padding-bottom: 8px;
+  padding-bottom: 0;
 }
 
 .section-heading {
@@ -548,7 +696,7 @@ button {
 
 .feature-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 14px;
 }
 
@@ -556,17 +704,13 @@ button {
   grid-template-columns: minmax(0, 1fr);
 }
 
-.feature-card--wide {
-  grid-column: span 2;
-}
-
 .feature-card {
-  min-height: 100%;
+  min-height: 120px;
 }
 
 .project-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) repeat(2, minmax(0, 0.9fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 14px;
   align-items: stretch;
 }
@@ -576,12 +720,7 @@ button {
   flex-direction: column;
   justify-content: space-between;
   gap: 12px;
-  min-height: 100%;
-}
-
-.project-card--feature {
-  grid-row: span 2;
-  min-height: 100%;
+  min-height: 120px;
 }
 
 .card-link {
@@ -600,11 +739,11 @@ button {
 }
 
 .contact-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .contact-grid--featured {
-  grid-template-columns: minmax(0, 1.15fr) repeat(2, minmax(0, 0.85fr));
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .contact-card {
@@ -612,11 +751,7 @@ button {
   flex-direction: column;
   justify-content: space-between;
   gap: 12px;
-  min-height: 100%;
-}
-
-.contact-card--main {
-  grid-column: span 2;
+  min-height: 120px;
 }
 
 .card,
@@ -651,15 +786,11 @@ button {
 }
 
 .timeline {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .timeline-item {
-  min-height: 100%;
-}
-
-.timeline-item--featured {
-  grid-column: span 2;
+  min-height: 120px;
 }
 
 .game-switcher {
@@ -941,27 +1072,21 @@ button {
     grid-template-columns: 1fr;
   }
 
-  .feature-grid,
-  .project-grid,
-  .card-grid,
-  .contact-grid,
-  .timeline {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .feature-card--wide,
-  .project-card--feature,
-  .contact-card--main,
-  .timeline-item--featured {
-    grid-column: span 2;
-  }
-
   .hero-metrics {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .choice-list {
     grid-template-columns: 1fr;
+  }
+
+  .page-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-microgrid {
+    grid-template-columns: 1fr;
+    margin-top: 0;
   }
 }
 
@@ -1012,6 +1137,16 @@ button {
     grid-template-columns: 1fr;
   }
 
+  .page-card {
+    margin: 16px auto 20px;
+    min-height: auto;
+    padding-bottom: 36px;
+  }
+
+  .hero-microgrid {
+    grid-template-columns: 1fr;
+  }
+
   .game-header,
   .game-controls,
   .perks-meta,
@@ -1035,7 +1170,8 @@ button {
   .feature-grid,
   .project-grid,
   .contact-grid,
-  .timeline {
+  .timeline,
+  .page-rail {
     grid-template-columns: 1fr;
   }
 

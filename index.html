@@ -40,7 +40,7 @@
   </header>
 
   <main id="main">
-    <section id="home" class="hero shell">
+    <section id="home" class="hero shell page-card">
       <div class="hero-copy panel">
         <p class="eyebrow">Build / Play / Ship</p>
         <h1>작게 설계하고, 빠르게 검증하고, 끝까지 동작하게.</h1>
@@ -51,6 +51,21 @@
         <div class="hero-actions">
           <a class="primary-action" href="#projects">작업 둘러보기</a>
           <a class="secondary-action" href="#games">게임 시작하기</a>
+        </div>
+
+        <div class="hero-microgrid" aria-label="핵심 포인트">
+          <article class="card micro-card">
+            <p class="card-label">One page</p>
+            <h3>섹션이 길어도 카드 단위로 읽히게</h3>
+          </article>
+          <article class="card micro-card">
+            <p class="card-label">One state</p>
+            <h3>Snake와 Survivor는 입력과 상태를 분리</h3>
+          </article>
+          <article class="card micro-card">
+            <p class="card-label">One deploy</p>
+            <h3>정적 호스팅과 상대 경로만으로 유지</h3>
+          </article>
         </div>
       </div>
 
@@ -66,6 +81,55 @@
             <li>Responsive Nav</li>
             <li>Game Hub</li>
           </ul>
+        </article>
+
+        <article class="panel hero-visual" aria-label="시각 예시">
+          <div class="hero-visual-copy">
+            <p class="eyebrow">Visual cue</p>
+            <h3>카드와 캔버스를 하나의 리듬으로 묶었습니다.</h3>
+            <p>유리 같은 패널 안에 인터페이스와 게임 화면의 분위기를 같이 보여주는 추상 일러스트입니다.</p>
+          </div>
+
+          <svg class="hero-illustration" viewBox="0 0 520 300" role="img" aria-label="추상 카드 일러스트">
+            <defs>
+              <linearGradient id="heroCardA" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#f2f9ff" stop-opacity="0.92" />
+                <stop offset="100%" stop-color="#8fd4ff" stop-opacity="0.28" />
+              </linearGradient>
+              <linearGradient id="heroCardB" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#c8ffd9" stop-opacity="0.82" />
+                <stop offset="100%" stop-color="#7fcdff" stop-opacity="0.14" />
+              </linearGradient>
+              <linearGradient id="heroCardC" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18" />
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05" />
+              </linearGradient>
+              <filter id="heroGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" type="matrix" values="
+                  1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 0.45 0" />
+              </filter>
+            </defs>
+
+            <circle cx="382" cy="68" r="48" fill="#7fcdff" fill-opacity="0.2" filter="url(#heroGlow)" />
+            <circle cx="104" cy="214" r="38" fill="#ecffb8" fill-opacity="0.12" filter="url(#heroGlow)" />
+            <rect x="40" y="44" width="246" height="168" rx="32" fill="url(#heroCardA)" />
+            <rect x="74" y="80" width="108" height="24" rx="12" fill="rgba(255,255,255,0.42)" />
+            <rect x="74" y="118" width="170" height="18" rx="9" fill="rgba(255,255,255,0.28)" />
+            <rect x="74" y="144" width="132" height="18" rx="9" fill="rgba(255,255,255,0.2)" />
+            <rect x="310" y="62" width="168" height="94" rx="26" fill="url(#heroCardB)" />
+            <rect x="332" y="90" width="74" height="18" rx="9" fill="rgba(255,255,255,0.4)" />
+            <rect x="332" y="118" width="108" height="12" rx="6" fill="rgba(255,255,255,0.26)" />
+            <rect x="310" y="176" width="164" height="78" rx="24" fill="url(#heroCardC)" />
+            <circle cx="346" cy="214" r="12" fill="#7fcdff" />
+            <circle cx="382" cy="214" r="12" fill="#ecffb8" />
+            <circle cx="418" cy="214" r="12" fill="#f7b77d" />
+            <path d="M78 238 C132 212, 160 228, 202 198 S280 160, 332 170" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="3" stroke-linecap="round" />
+            <path d="M346 30 L346 12 M350 20 L338 20" stroke="rgba(255,255,255,0.48)" stroke-width="3" stroke-linecap="round" />
+          </svg>
         </article>
 
         <div class="hero-metrics">
@@ -86,9 +150,36 @@
           </article>
         </div>
       </aside>
+
+      <div class="page-rail">
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H17.5A2.5 2.5 0 0 1 20 7.5v9A2.5 2.5 0 0 1 17.5 19H6.5A2.5 2.5 0 0 1 4 16.5v-9Z"/><path d="M8 9.5h8M8 12h5M8 14.5h7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">System</p>
+          <h3>한 페이지 안에서 카드처럼 넘겨 읽는 구조</h3>
+          <p>각 섹션은 큰 카드로, 내부 정보는 더 작은 카드로 나눠서 한 화면씩 읽히도록 맞췄습니다.</p>
+        </article>
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3 4.5 7.5v9L12 21l7.5-4.5v-9L12 3Z"/><path d="M12 7.5v9m-4.5-6 4.5 2.5 4.5-2.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Live facts</p>
+          <h3>정적 호스팅, 반응형 내비게이션, 분리된 게임 상태</h3>
+          <p>GitHub Pages에서 바로 열리고, Snake와 Survivor는 서로의 입력과 렌더링을 건드리지 않습니다.</p>
+        </article>
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M6 7.5A2.5 2.5 0 0 1 8.5 5h7A2.5 2.5 0 0 1 18 7.5v9A2.5 2.5 0 0 1 15.5 19h-7A2.5 2.5 0 0 1 6 16.5v-9Z"/><path d="M9 9h6M9 12h6M9 15h4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Scope</p>
+          <h3>백엔드 없이 HTML, CSS, JavaScript, Canvas만 사용</h3>
+          <p>설치와 로그인 없이도 읽고 조작할 수 있는 최소한의 구성으로 유지합니다.</p>
+        </article>
+      </div>
     </section>
 
-    <section id="about" class="section shell">
+    <section id="about" class="section shell page-card">
       <div class="section-heading">
         <p class="eyebrow">About</p>
         <h2>아이디어를 화면과 동작으로 연결합니다</h2>
@@ -119,9 +210,36 @@
           </p>
         </article>
       </div>
+
+      <div class="page-rail">
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 4 4.5 8v8L12 20l7.5-4V8L12 4Z"/><path d="M12 9v6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/><path d="M9.5 12h5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">What stays in</p>
+          <h3>명확한 타이포, 큰 여백, 분리된 상태</h3>
+          <p>읽기 쉬운 정보 구조와, 반응형에서 무너지지 않는 게임 상태를 우선으로 둡니다.</p>
+        </article>
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4.5 7.5h15M4.5 12h15M4.5 16.5h15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/><path d="M7 7.5v9M17 7.5v9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/></svg>
+          </span>
+          <p class="card-label">What stays out</p>
+          <h3>비승인 개인정보, 백엔드, 불필요한 복잡도</h3>
+          <p>확인되지 않은 프로필 정보나 운영 의존성이 큰 구성은 공개 페이지에서 제외합니다.</p>
+        </article>
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 4.5 20 9v6l-8 4.5L4 15V9l8-4.5Z"/><path d="M8 11.5l2.5 2.5L16 8.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Why it works</p>
+          <h3>한 카드 안에 하나의 메시지</h3>
+          <p>섹션과 카드의 역할이 분명할수록, 사용자는 페이지를 덜 고민하고 더 빨리 읽습니다.</p>
+        </article>
+      </div>
     </section>
 
-    <section id="projects" class="section shell">
+    <section id="projects" class="section shell page-card">
       <div class="section-heading">
         <p class="eyebrow">Projects</p>
         <h2>지금 이 사이트에서 바로 확인할 수 있는 작업</h2>
@@ -156,9 +274,36 @@
           <a class="card-link" href="#games">모드 상세 보기</a>
         </article>
       </div>
+
+      <div class="page-rail">
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 8.5A3.5 3.5 0 0 1 8.5 5h7A3.5 3.5 0 0 1 19 8.5v7A3.5 3.5 0 0 1 15.5 19h-7A3.5 3.5 0 0 1 5 15.5v-7Z"/><path d="M9 9.5h6M9 12h4M9 14.5h5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Live</p>
+          <h3>https://shpeterpan.github.io/</h3>
+          <p>공개 주소는 GitHub Pages에서 바로 확인할 수 있습니다.</p>
+        </article>
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 4 4.5 8v8L12 20l7.5-4V8L12 4Z"/><path d="M8.5 8.5h7M8.5 12h7M8.5 15.5h4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Source</p>
+          <h3>github.com/shpeterpan/shpeterpan.github.io</h3>
+          <p>소스는 HTML, CSS, JavaScript와 Canvas 기반 게임 로직으로만 구성됩니다.</p>
+        </article>
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3 4.5 7.5v9L12 21l7.5-4.5v-9L12 3Z"/><path d="M12 7v10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/><path d="M8.5 11.2 12 13.3l3.5-2.1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Interaction</p>
+          <h3>Click, keys, and touch</h3>
+          <p>탭, 키보드, 방향 버튼을 모두 한 페이지 안에서 확인할 수 있습니다.</p>
+        </article>
+      </div>
     </section>
 
-    <section id="experience" class="section shell">
+    <section id="experience" class="section shell page-card">
       <div class="section-heading">
         <p class="eyebrow">Experience</p>
         <h2>작업 로그로 남기는 빌드 히스토리</h2>
@@ -181,9 +326,36 @@
           <p>상대 경로와 단일 페이지 구조를 중심으로 GitHub Pages 호환성을 계속 지킵니다.</p>
         </article>
       </div>
+
+      <div class="page-rail">
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M6 9.5A3.5 3.5 0 0 1 9.5 6h5A3.5 3.5 0 0 1 18 9.5v5A3.5 3.5 0 0 1 14.5 18h-5A3.5 3.5 0 0 1 6 14.5v-5Z"/><path d="M9 12h6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Check 01</p>
+          <h3>375px, 768px, 1440px</h3>
+          <p>세 개의 대표 폭에서 가로 스크롤 없이 읽히도록 맞추고 있습니다.</p>
+        </article>
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 4 4.5 8v8L12 20l7.5-4V8L12 4Z"/><path d="M9 12h6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/><path d="M12 8.5v7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Check 02</p>
+          <h3>Keyboard and touch</h3>
+          <p>게임 입력은 방향키, WASD, 모바일 버튼으로 나뉘어 같은 상태를 제어합니다.</p>
+        </article>
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 4 4.5 8v8L12 20l7.5-4V8L12 4Z"/><path d="M8.5 12h7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/><path d="M12 8.5v7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Check 03</p>
+          <h3>Reduced motion friendly</h3>
+          <p>움직임을 줄여야 할 때도 구조와 읽기 순서는 그대로 유지되도록 설계합니다.</p>
+        </article>
+      </div>
     </section>
 
-    <section id="research" class="section shell">
+    <section id="research" class="section shell page-card">
       <div class="section-heading">
         <p class="eyebrow">Research</p>
         <h2>실험하면서 지킨 설계 원칙</h2>
@@ -199,9 +371,36 @@
           <p>추가 도구 없이도 열리는 정적 구조를 유지하고, 페이지 성능과 호환성을 먼저 봅니다.</p>
         </article>
       </div>
+
+      <div class="page-rail">
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 7.5A2.5 2.5 0 0 1 7.5 5h9A2.5 2.5 0 0 1 19 7.5v9A2.5 2.5 0 0 1 16.5 19h-9A2.5 2.5 0 0 1 5 16.5v-9Z"/><path d="M8 8.5h8M8 12h6M8 15.5h4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Performance</p>
+          <h3>Canvas와 DOM을 분리해 렌더링 부담을 줄임</h3>
+          <p>게임 화면은 캔버스에서, 설명은 카드에서 처리해서 구조가 단순해집니다.</p>
+        </article>
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 4 4.5 8v8L12 20l7.5-4V8L12 4Z"/><path d="M12 7v10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/><path d="M8.5 11.5 12 13.6l3.5-2.1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Motion</p>
+          <h3>과한 애니메이션보다 스냅과 여백을 우선</h3>
+          <p>넘어가는 느낌은 스크롤과 레이아웃으로 만들고, 시선 부담은 줄입니다.</p>
+        </article>
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 4.5 20 9v6l-8 4.5L4 15V9l8-4.5Z"/><path d="M12 8.5V15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Targets</p>
+          <h3>정적 배포와 장기 유지보수</h3>
+          <p>빌드 도구나 외부 백엔드가 없어도 오래 유지될 수 있는 구성을 우선합니다.</p>
+        </article>
+      </div>
     </section>
 
-    <section id="contact" class="section shell">
+    <section id="contact" class="section shell page-card">
       <div class="section-heading">
         <p class="eyebrow">Contact</p>
         <h2>연락처 대신, 지금은 결과물로 이야기합니다</h2>
@@ -226,9 +425,36 @@
           <p>빌드 도구 없이도 동작하는 가장 단순한 조합으로 구성했습니다.</p>
         </article>
       </div>
+
+      <div class="page-rail">
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M7.5 5h9A2.5 2.5 0 0 1 19 7.5v9A2.5 2.5 0 0 1 16.5 19h-9A2.5 2.5 0 0 1 5 16.5v-9A2.5 2.5 0 0 1 7.5 5Z"/><path d="M8.5 11.5h7M8.5 14.5h5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Open</p>
+          <h3>Public URL first</h3>
+          <p>바로 열리는 주소를 중심으로 결과물을 보여주는 구성을 유지합니다.</p>
+        </article>
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 4 4.5 8v8L12 20l7.5-4V8L12 4Z"/><path d="M8.5 8.5h7M8.5 12h7M8.5 15.5h5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Repository</p>
+          <h3>Source of truth lives in GitHub</h3>
+          <p>정리와 배포의 기준은 항상 저장소의 최신 커밋입니다.</p>
+        </article>
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5.5 7.5h13v9h-13z"/><path d="M8 10h8M8 13h5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Format</p>
+          <h3>Static web, interactive canvas</h3>
+          <p>문서형 포트폴리오와 게임 인터랙션이 한 화면 안에서 공존합니다.</p>
+        </article>
+      </div>
     </section>
 
-    <section id="games" class="section shell">
+    <section id="games" class="section shell page-card">
       <div class="section-heading">
         <p class="eyebrow">Games</p>
         <h2>Snake와 뱀서 모드를 분리한 게임 허브</h2>
@@ -336,6 +562,33 @@
           </div>
 
           <p class="game-note">자동 공격, 적 처치, XP, 레벨업 선택, 보스, 저장 초기화를 포함합니다.</p>
+        </article>
+      </div>
+
+      <div class="page-rail">
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 4.5 19.5 9v6L12 19.5 4.5 15V9L12 4.5Z"/><path d="M8.5 12h7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Snake</p>
+          <h3>Start, pause, restart</h3>
+          <p>짧은 루프의 반응 속도 확인용으로 가장 가벼운 모드입니다.</p>
+        </article>
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 4.5 19.5 9v6L12 19.5 4.5 15V9L12 4.5Z"/><path d="M9 11.5h6M9 14.5h4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Survivor</p>
+          <h3>Five-minute run with upgrades</h3>
+          <p>전투와 성장, 보스와 저장이 섞인 장기 루프를 확인할 수 있습니다.</p>
+        </article>
+        <article class="card rail-card">
+          <span class="rail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5.5 7.5h13v9h-13z"/><path d="M8 12h8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/><path d="M12 8.5v7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></svg>
+          </span>
+          <p class="card-label">Inputs</p>
+          <h3>Keys, buttons, and tabs</h3>
+          <p>페이지 이동과 게임 조작이 서로 방해하지 않도록 분리되어 있습니다.</p>
         </article>
       </div>
     </section>
