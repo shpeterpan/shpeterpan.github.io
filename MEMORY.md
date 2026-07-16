@@ -22,15 +22,15 @@
 - Last test: 배포본 HTTP 200, 뱀서 선택 클릭·재개·콘솔 `PASS`
 
 ## Current State
-- 상태: `ACTING`
+- 상태: `DEPLOYED`
 - 실행 모드: `CODEX_FALLBACK`
 - Claude 모델: `claude-sonnet-5`(문서상 검증 대상, 이 세션에서는 직접 호출 불가)
-- 현재 commit: `e010166`
-- 마지막 정상 commit·URL: `e010166`, `https://shpeterpan.github.io/`
-- Git 상태: `main`, modified `AORR_LOG.md`, `MEMORY.md`, `index.html`, `styles.css`; untracked `.DS_Store`, `AUTOMATION_READINESS.md`, `CHANGE_REQUEST.md`, `STEP1_ANALYSIS.md`, `claude-code-cli/`, `samsung-agent-education2-main/`
-- Rollback 기준: 이번 루프에서 손댄 파일만 되돌리고, 기준선은 마지막 정상 배포 커밋 `e010166`로 복구한다.
-- 완료 루프: 현재 디자인 재배치와 공개 콘텐츠 정리 진행 중
-- 다음 루프: 2026 금융앱형 배치와 공개 문구 정리
+- 현재 commit: `b179345`
+- 마지막 정상 commit·URL: `b179345`, `https://shpeterpan.github.io/`
+- Git 상태: `main`, modified `MEMORY.md`; untracked `.DS_Store`, `AUTOMATION_READINESS.md`, `CHANGE_REQUEST.md`, `STEP1_ANALYSIS.md`, `claude-code-cli/`, `samsung-agent-education2-main/`
+- Rollback 기준: 이번 루프에서 손댄 파일만 되돌리고, 기준선은 마지막 정상 배포 커밋 `b179345`로 복구한다.
+- 완료 루프: 공개 콘텐츠 정리, 금융앱형 배치, 배포 완료
+- 다음 루프: 사용자 요청 시 유지보수
 - Retry: `1`
 - fingerprint: `없음`
 - blocker: 없음
@@ -63,4 +63,4 @@
 | Step 3 설계 | READY | `CODEX_WORKER + CLAUDE_VERIFIER` / `claude-sonnet-5` | `AORR.md`, `MEMORY.md` | 미실행 | 0 | 승인 후 기준선 테스트 |
 | Step 1 분석 | READY | 문서 분석 | `STEP1_ANALYSIS.md` | 미실행 | 0 | 공개 범위·보존 목록 확정 |
 | Step 4 복구 | READY | 문서 갱신 | `MEMORY.md` | 미실행 | 0 | 현재 상태 유지 |
-| 2026 UI 재배치 | ACTING | `CODEX_FALLBACK` / `claude-sonnet-5` | `index.html`, `styles.css` | 미실행 | 0 | 공개 콘텐츠 정리 및 금융앱형 배치 적용 |
+| 2026 UI 재배치 | DEPLOYED | `CODEX_FALLBACK` / `claude-sonnet-5` | `index.html`, `styles.css` | 로컬 HTTP, 공개 URL 200 | 0 | 완료 |

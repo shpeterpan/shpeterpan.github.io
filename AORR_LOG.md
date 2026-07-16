@@ -1,5 +1,11 @@
 # AORR Log
 
+## 2026-07-16 Deployment Closeout
+
+- Deploy: committed and pushed `b179345` to `main`.
+- Deploy verify: `https://shpeterpan.github.io/` returned HTTP `200` and the live HTML now includes the new hero title and finance-style copy.
+- Result scope: deployment complete; no rollback or follow-up edits required.
+
 ## 2026-07-16 Step 9 Finance-style UI Reflow
 
 - Mode: `CODEX_FALLBACK`; Claude verifier was unavailable in this session, so Codex handled content rewrite and local validation directly.
