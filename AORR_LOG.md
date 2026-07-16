@@ -1,5 +1,17 @@
 # AORR Log
 
+## 2026-07-16 Survivor Mode Interaction Fix
+
+- Mode: `CODEX_FALLBACK`; `claude-sonnet-5` verifier returned no report in two non-interactive attempts, so Codex ran the unchanged pre/post checks.
+- Observe: deployed browser reproduction showed an upgrade choice click failing with `Element is not connected` because the choice buttons were rebuilt every animation frame.
+- Pre-test failures: `SURVIVOR_AUTO_MOVE`, `BOSS_SHOT_WRONG_TARGET`, `XP_DOUBLE_AWARD`, and `CHOICE_DOM_REPLACED`.
+- Act: stopped default movement, added held keyboard/mobile movement with release-to-stop, routed boss shots to the player, removed duplicate kill XP, and memoized choice rendering.
+- Act: removed the choice-state canvas veil and CSS backdrop blur, replacing it with a non-blurred bottom gradient and solid choice cards.
+- Retry 1: `FIRST_INPUT_RESET` showed that starting from a direction input cleared that same input; reordered run initialization before applying the movement vector.
+- Verify: all three deterministic core checks passed; ordinary upgrade click closed the overlay and resumed the run.
+- Verify: local HTTP passed at `375px`, `768px`, and `1440px` with no horizontal overflow, visible action controls, and zero console warnings/errors.
+- Result scope: local hotfix `PASS` after one Retry; commit, push, and Pages redeployment require user approval.
+
 ## 2026-07-16 Step 7 Full Implementation
 
 - Mode: `CODEX_WORKER + CLAUDE_VERIFIER`

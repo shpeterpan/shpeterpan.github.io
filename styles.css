@@ -569,14 +569,18 @@ button {
 .choice-overlay {
   position: absolute;
   inset: 18px;
+  z-index: 2;
   display: grid;
   gap: 14px;
-  align-content: center;
+  align-content: end;
   justify-items: center;
   padding: 18px;
   border-radius: var(--radius-xl);
-  background: rgba(8, 17, 27, 0.78);
-  backdrop-filter: blur(14px);
+  background: linear-gradient(180deg, rgba(8, 17, 27, 0.05) 0%, rgba(8, 17, 27, 0.72) 58%, rgba(8, 17, 27, 0.94) 100%);
+}
+
+.choice-overlay[hidden] {
+  display: none;
 }
 
 .choice-title {
@@ -601,7 +605,7 @@ button {
   padding: 16px;
   text-align: left;
   color: var(--text);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(14, 29, 45, 0.96);
   border: 1px solid var(--line);
   border-radius: 18px;
 }

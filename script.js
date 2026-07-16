@@ -118,6 +118,9 @@ let snakeTimerId = null;
 let snakeLastSpeed = snake.speedMs;
 let survivorFrameId = 0;
 let survivorLastTimestamp = 0;
+let survivorChoiceSignature = null;
+const pressedSurvivorKeys = new Set();
+const survivorPointerDirections = new Map();
 
 function syncNav(open) {
   navOpen = open;
@@ -131,6 +134,9 @@ function closeNav() {
 }
 
 function showGame(gameName) {
+  if (gameName !== 'survivors') {
+    clearSurvivorMovement();
+  }
   activeGame = gameName;
   gameTabs.forEach((button) => {
     const active = button.dataset.gameTab === gameName;
@@ -296,6 +302,12 @@ function renderChoiceOverlay() {
   if (!survivorChoices) {
     return;
   }
+
+  const signature = `${survivor.choiceMode ?? 'none'}:${survivor.choices.map((choice) => choice.id).join(',')}`;
+  if (signature === survivorChoiceSignature) {
+    return;
+  }
+  survivorChoiceSignature = signature;
 
   survivorChoices.hidden = survivor.choices.length === 0;
   survivorChoices.innerHTML = '';
@@ -470,7 +482,7 @@ function renderSurvivor() {
 
   ctx.restore();
 
-  const overlay = survivor.status === 'running' ? null : survivor.message;
+  const overlay = survivor.status === 'running' || survivor.status === 'choice' ? null : survivor.message;
   if (overlay) {
     ctx.fillStyle = 'rgba(8, 16, 28, 0.44)';
     ctx.fillRect(0, 0, width, height);
@@ -522,6 +534,26 @@ function handleDirection(directionName) {
   renderSurvivor();
 }
 
+function syncSurvivorMovement() {
+  const activeDirections = new Set(survivorPointerDirections.values());
+  const keyDirections = {
+    up: pressedSurvivorKeys.has('arrowup') || pressedSurvivorKeys.has('w'),
+    down: pressedSurvivorKeys.has('arrowdown') || pressedSurvivorKeys.has('s'),
+    left: pressedSurvivorKeys.has('arrowleft') || pressedSurvivorKeys.has('a'),
+    right: pressedSurvivorKeys.has('arrowright') || pressedSurvivorKeys.has('d'),
+  };
+
+  const x = Number(keyDirections.right || activeDirections.has('right')) - Number(keyDirections.left || activeDirections.has('left'));
+  const y = Number(keyDirections.down || activeDirections.has('down')) - Number(keyDirections.up || activeDirections.has('up'));
+  survivor.setMovement(x, y);
+}
+
+function clearSurvivorMovement() {
+  pressedSurvivorKeys.clear();
+  survivorPointerDirections.clear();
+  survivor.stopMovement();
+}
+
 function handleKeydown(event) {
   if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
     return;
@@ -541,7 +573,12 @@ function handleKeydown(event) {
 
   if (directionMap[key]) {
     event.preventDefault();
-    handleDirection(directionMap[key]);
+    if (activeGame === 'snake') {
+      handleDirection(directionMap[key]);
+    } else {
+      pressedSurvivorKeys.add(key);
+      syncSurvivorMovement();
+    }
     return;
   }
 
@@ -560,9 +597,38 @@ function handleKeydown(event) {
   }
 }
 
+function handleKeyup(event) {
+  const key = event.key.toLowerCase();
+  if (!pressedSurvivorKeys.delete(key)) {
+    return;
+  }
+
+  if (activeGame === 'survivors') {
+    event.preventDefault();
+    syncSurvivorMovement();
+  }
+}
+
 function attachGamePanelListeners(panel, gameName) {
   panel.querySelectorAll('[data-dir]').forEach((button) => {
-    button.addEventListener('click', () => handleDirection(button.dataset.dir));
+    if (gameName === 'snake') {
+      button.addEventListener('click', () => handleDirection(button.dataset.dir));
+      return;
+    }
+
+    button.addEventListener('pointerdown', (event) => {
+      event.preventDefault();
+      survivorPointerDirections.set(event.pointerId, button.dataset.dir);
+      syncSurvivorMovement();
+    });
+
+    const releaseDirection = (event) => {
+      survivorPointerDirections.delete(event.pointerId);
+      syncSurvivorMovement();
+    };
+    button.addEventListener('pointerup', releaseDirection);
+    button.addEventListener('pointercancel', releaseDirection);
+    button.addEventListener('pointerleave', releaseDirection);
   });
 
   panel.querySelectorAll(`[data-${gameName}-action]`).forEach((button) => {
@@ -594,6 +660,8 @@ primaryNav.addEventListener('click', (event) => {
 });
 
 window.addEventListener('keydown', handleKeydown);
+window.addEventListener('keyup', handleKeyup);
+window.addEventListener('blur', clearSurvivorMovement);
 window.addEventListener('resize', () => {
   if (!window.matchMedia('(max-width: 720px)').matches) {
     closeNav();

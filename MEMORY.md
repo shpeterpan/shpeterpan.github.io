@@ -19,16 +19,16 @@
 - Mode: `CODEX_WORKER + CLAUDE_VERIFIER` 확인 완료, 불가 시 `CODEX_FALLBACK`
 - Claude model: `claude-sonnet-5`
 - CLI check: `claude auth status` OK, `claude --print --model claude-sonnet-5` OK
-- Last test: 로컬 구현/브라우저 검증 `PASS`
+- Last test: 뱀서 입력·업그레이드·전투 로직 및 375/768/1440 로컬 HTTP `PASS`
 
 ## Current State
 - 상태: `DEPLOY_APPROVAL_REQUIRED`
-- 완료 루프: `Step 7` 구현 및 로컬 검증 완료
-- 다음 루프: 사용자 승인 후 commit/push/배포
-- Retry: `0`
+- 완료 루프: 배포본 뱀서 모드 결함 수정 및 로컬 검증 완료
+- 다음 루프: 사용자 승인 후 hotfix commit/push/Pages 재배포
+- Retry: `1`
 - fingerprint: `없음`
-- blocker: 사용자 배포 승인 필요
-- 마지막 정상 commit·URL: `없음`
+- blocker: hotfix 배포 승인 필요
+- 마지막 정상 commit·URL: `0c8f0e1`, `https://shpeterpan.github.io/`
 
 ## Acceptance
 - 승인된 사실만 공개하고, 상대 경로와 정적 호스팅만으로 동작한다.
@@ -53,6 +53,7 @@
 ## Recent Loops
 | Loop | 상태 | 실행 모드·모델 | 변경 파일 | 테스트 결과 | Retry | 다음 작업 |
 |---|---|---|---|---|---:|---|
+| 뱀서 상호작용 수정 | READY | `CODEX_FALLBACK` / Claude 무응답 | `game-core.js`, `script.js`, `styles.css` | 코어, 선택 클릭, 375/768/1440, 콘솔 `PASS` | 1 | 승인 후 hotfix 배포 |
 | Step 7 전체 구현 | READY | `CODEX_WORKER + CLAUDE_VERIFIER` / `claude-sonnet-5` | `index.html`, `styles.css`, `script.js`, `game-core.js` | 로컬 HTTP, 375/768/1440, 링크, 콘솔, Snake, 뱀서 모드 `PASS` | 0 | 사용자 승인 후 배포 |
 | Step 3 설계 | READY | `CODEX_WORKER + CLAUDE_VERIFIER` / `claude-sonnet-5` | `AORR.md`, `MEMORY.md` | 미실행 | 0 | 승인 후 기준선 테스트 |
 | Step 1 분석 | READY | 문서 분석 | `STEP1_ANALYSIS.md` | 미실행 | 0 | 공개 범위·보존 목록 확정 |

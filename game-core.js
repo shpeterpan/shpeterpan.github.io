@@ -347,7 +347,7 @@ export class SurvivorCore {
       x: this.world.width / 2,
       y: this.world.height / 2,
       moveX: 0,
-      moveY: -1,
+      moveY: 0,
       speed: 260 + this.perks.pickup * 5,
       maxHp: 100 + this.perks.maxHp * 10,
       hp: 100 + this.perks.maxHp * 10,
@@ -413,13 +413,25 @@ export class SurvivorCore {
       return false;
     }
 
-    this.player.moveX = direction.x;
-    this.player.moveY = direction.y;
-    if (this.status === 'idle') {
+    return this.setMovement(direction.x, direction.y);
+  }
+
+  setMovement(x, y) {
+    const moveX = clamp(Number(x) || 0, -1, 1);
+    const moveY = clamp(Number(y) || 0, -1, 1);
+    if (this.status === 'idle' && (moveX !== 0 || moveY !== 0)) {
       this.startRun();
     }
 
+    this.player.moveX = moveX;
+    this.player.moveY = moveY;
+
     return true;
+  }
+
+  stopMovement() {
+    this.player.moveX = 0;
+    this.player.moveY = 0;
   }
 
   applyChoice(choiceId) {
@@ -803,6 +815,21 @@ export class SurvivorCore {
         projectile.life = 0;
       }
 
+      if (projectile.kind === 'boss-shot') {
+        const hitPlayer = distance(projectile.x, projectile.y, this.player.x, this.player.y) <= projectile.radius + 24;
+        if (hitPlayer) {
+          projectile.life = 0;
+          if (this.player.invuln <= 0) {
+            this.player.hp -= projectile.damage;
+            this.player.invuln = 0.3;
+            if (this.player.hp <= 0) {
+              this.endRun('defeat', '체력이 바닥났습니다.');
+            }
+          }
+        }
+        continue;
+      }
+
       const targets = this.enemies.filter((enemy) => {
         if (enemy.dead) {
           return false;
@@ -813,7 +840,7 @@ export class SurvivorCore {
       });
 
       for (const enemy of targets) {
-        if (this.damageEnemy(enemy, projectile.damage, projectile.kind === 'boss-shot' ? 'bossShot' : 'spark')) {
+        if (this.damageEnemy(enemy, projectile.damage, 'spark')) {
           projectile.pierce -= 1;
         }
 
@@ -872,12 +899,10 @@ export class SurvivorCore {
       enemy.dead = true;
       if (enemy.kind === 'boss') {
         this.bossDefeated = true;
-        this.exp += enemy.xp;
         this.awardRunCoins(enemy.coinValue);
         this.spawnPickup(enemy.x, enemy.y, enemy.xp);
         this.endRun('victory', '보스를 처치했습니다.');
       } else {
-        this.exp += enemy.xp;
         this.awardRunCoins(enemy.coinValue);
         this.spawnPickup(enemy.x, enemy.y, enemy.xp);
       }
